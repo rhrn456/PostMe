@@ -59,15 +59,9 @@
 </style>
 </head>
 <body>
-	<%-- 캐시 방지 처리 --%>
-	<%
-		response.setHeader("Pragma", "no-cache");
-	response.setHeader("Cache-Control", "no-cache, no-store");
-	response.setDateHeader("Expires", 0L);
-	%>
 	<jsp:include page="navbar.jsp" />
 	<div class="container">
-		<%-- 검색 폼 --%>
+		<h2>Searched - ${param.query}</h2>
 		<form action="/posts/search" method="get">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="검색어 입력"
@@ -77,19 +71,18 @@
 				</div>
 			</div>
 		</form>
-		<%-- 검색 결과 표시 --%>
 		<c:choose>
 			<c:when test="${not empty posts}">
 				<c:forEach items="${posts}" var="post">
 					<div class="post-preview"
 						onclick="location.href='/posts/${post.id}'">
 						<h3>${post.title}</h3>
-						<p>${post.content}</p>
+						<p>${fn:substring(post.content, 0, 10)}...</p>
 					</div>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<div class="empty-post">검색 결과가 없습니다.</div>
+				<div class="empty-post">게시글이 없습니다.</div>
 			</c:otherwise>
 		</c:choose>
 		<nav id="pagination">
@@ -99,7 +92,7 @@
 						<span>${pageNum}</span>
 					</c:when>
 					<c:otherwise>
-						<a href="?page=${pageNum}">${pageNum}</a>
+						<a href="?page=${pageNum}&query=${param.query}">${pageNum}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -108,10 +101,5 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script>
-		function handlePostClick(postId) {
-			window.location.href = '/posts/' + postId;
-		}
-	</script>
 </body>
 </html>

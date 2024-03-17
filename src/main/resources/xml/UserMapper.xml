@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.postme.mapper.UserMapper">
+
+    <resultMap id="userResultMap" type="com.spring.postme.model.User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="isAdmin" column="isAdmin" />
+        <result property="createdAt" column="createdAt" />
+    </resultMap>
+
+    <select id="getUserByUsername" parameterType="string" resultMap="userResultMap">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+
+    <select id="findAll" resultMap="userResultMap">
+        SELECT * FROM users
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="userResultMap">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.spring.postme.model.User">
+        INSERT INTO users (username, password, name, email)
+        VALUES (#{username}, #{password}, #{name}, #{email})
+    </insert>
+
+    <insert id="insertAdmin" parameterType="com.spring.postme.model.User">
+        INSERT INTO users (username, password, name, email, isAdmin)
+        VALUES (#{username}, #{password}, #{name}, #{email}, true)
+    </insert>
+
+    <update id="updateUser" parameterType="com.spring.postme.model.User">
+        UPDATE users SET username = #{username}, password = #{password}, name = #{name}, email = #{email}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM users WHERE id = #{userId}
+    </delete>
+
+    <select id="countUsers" resultType="int">
+        SELECT COUNT(*) FROM users
+    </select>
+
+    <delete id="deleteAllUsers">
+        DELETE FROM users
+    </delete>
+
+    <select id="getUserById" parameterType="java.lang.Integer" resultType="com.spring.postme.model.User">
+        SELECT * FROM users WHERE id = #{userId}
+    </select>
+
+    <select id="getUserList" resultType="com.spring.postme.model.User">
+        SELECT * FROM users
+    </select>
+
+    <update id="updateUserAdminStatus">
+        UPDATE users SET isAdmin = #{adminStatus} WHERE id = #{userId}
+    </update>
+    
+</mapper>

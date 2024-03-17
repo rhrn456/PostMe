@@ -12,7 +12,7 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/postme?serverTimezone=Asia/Seoul" />
+			value="jdbc:mysql://localhost:3306/postme?serverTimezone=Asia/Seoul"/>
 		<property name="username" value="SCOTT" />
 		<property name="password" value="TIGER" />
 	</bean>
@@ -25,9 +25,8 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:xml/*.xml" />
+		<property name="mapperLocations" value="classpath:/xml/*.xml" />
 	</bean>
-
 
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
