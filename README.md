@@ -26,6 +26,7 @@
 - **박준희** :  사용자
 
 ## ⚙️ 기술 스택
+- **Skill** : Spring Framework
 - **Server** : Apache Tomcat v9.0
 - **DataBase** : MySQL
 - **아이디어 회의** : Slack, Zoom
@@ -33,3 +34,6 @@
 ## 📌 주요 기능
 - 게시글 작성
 - 게시글 공유
+
+## 데이터 베이스
+![POSTME ERD](https://github.com/rhrn456/PostMe/assets/154101606/b46a4a82-2321-4cd1-8465-6ac9ff7454d7)
